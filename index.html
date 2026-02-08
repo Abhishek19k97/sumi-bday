@@ -41,7 +41,12 @@
       box-shadow: 0 12px 35px rgba(0,0,0,0.5);
       cursor: pointer;
       transition: transform 0.3s ease;
+      position: relative;
+      z-index: 5;
+      will-change: transform;
+      opacity: 1 !important;
     }
+
 
     .hero-img.pop {
       animation: pop 0.4s ease;
@@ -172,7 +177,7 @@
 
         <p>
           Stay playful. Stay a little angry. Stay you.  
-          And yes — don’t stop smiling like that 💖
+          And yes, don’t stop smiling like that 💖
         </p>
 
         <div class="gift-icons">💝 💫 💖 🌙</div>
