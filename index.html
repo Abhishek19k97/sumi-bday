@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Suman ✨</title>
+
+  <!-- 🎨 CSS -->
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #f5f5f5;
+      background: radial-gradient(circle at top, #1b0f3b, #05010f 70%);
+      overflow-x: hidden;
+    }
+
+    #tsparticles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 420px;
+      margin: auto;
+      padding: 2rem 1.2rem 3rem;
+      text-align: center;
+    }
+
+    /* Hero Image */
+    .hero-img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin: 0 auto 1.5rem;
+      display: block;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .hero-img.pop {
+      animation: pop 0.4s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.12) rotate(2deg); }
+      100% { transform: scale(1); }
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+
+    /* Fade Animations */
+    .fade {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.8s forwards;
+    }
+
+    .delay-1 { animation-delay: 0.4s; }
+    .delay-2 { animation-delay: 0.8s; }
+    .delay-3 { animation-delay: 1.2s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Gift Section */
+    .gift-section {
+      margin-top: 2.5rem;
+    }
+
+    #giftBtn {
+      background: linear-gradient(135deg, #ff7eb3, #ff758c);
+      border: none;
+      border-radius: 30px;
+      padding: 0.9rem 1.4rem;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(255, 120, 170, 0.4);
+    }
+
+    .gift-reveal {
+      margin-top: 1.5rem;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 1.4rem;
+      display: none;
+      animation: reveal 0.6s ease forwards;
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .gift-icons {
+      font-size: 1.5rem;
+      margin-top: 0.8rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="tsparticles"></div>
+
+  <main class="container">
+    <img
+      src="image.png"
+      alt="Special Memory"
+      class="hero-img fade"
+      id="heroImg"
+    />
+
+    <h1 class="fade">Happy Birthday, Suman 🎉</h1>
+
+    <p class="fade delay-1">
+      Congrats on completing 64 amazing years of your life ✨  
+      Looks like you’re officially one step closer to becoming an old lady…
+    </p>
+
+    <p class="fade delay-2">
+      Don’t worry, you’re aging backwards anyway 😌  
+      Korean beauty doesn’t age 💖
+    </p>
+
+    <section class="gift-section fade delay-3">
+      <button id="giftBtn">🎁 Tap to receive your gift</button>
+
+      <div class="gift-reveal" id="giftReveal">
+        <h2>Just so you know 💖</h2>
+
+        <p>
+          You’re genuinely one of the purest and most innocent souls I’ve ever met.
+        </p>
+
+        <p>
+          You have so much potential in you,  
+          and I know you’re going to do something amazing.  
+          I believe in you more than you think.
+        </p>
+
+        <p>
+          This year and every year after,  
+          I hope and pray that all your dreams come true ✨
+        </p>
+
+        <p>
+          Stay playful. Stay a little angry. Stay you.  
+          And yes — don’t stop smiling like that 💖
+        </p>
+
+        <div class="gift-icons">💝 💫 💖 🌙</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ✨ tsParticles -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+  <!-- 🧠 JS -->
+  <script>
+    tsParticles.load("tsparticles", {
+      fullScreen: false,
+      background: { color: "transparent" },
+      particles: {
+        number: { value: 120, density: { enable: true, area: 900 } },
+        color: { value: ["#ffffff", "#ffd166", "#ff9ecd"] },
+        shape: { type: ["circle", "heart", "star", "moon"] },
+        opacity: { value: 0.85, random: true },
+        size: { value: { min: 1, max: 4 } },
+        move: { enable: true, speed: 1, outModes: "out" }
+      }
+    });
+
+    /* Hero Image Easter Egg */
+    const heroImg = document.getElementById("heroImg");
+    let tapped = false;
+
+    heroImg.addEventListener("click", () => {
+      heroImg.classList.remove("pop");
+      void heroImg.offsetWidth;
+      heroImg.classList.add("pop");
+
+      if (navigator.vibrate) navigator.vibrate(40);
+
+      alert(
+        tapped
+          ? "Okay okay relax… you are as young as 29 💖"
+          : "Easy 😏 You look beautiful, but that doesn’t mean you’re not an old lady."
+      );
+
+      tapped = true;
+    });
+
+    /* Gift Reveal */
+    const giftBtn = document.getElementById("giftBtn");
+    const giftReveal = document.getElementById("giftReveal");
+
+    giftBtn.addEventListener("click", () => {
+      giftReveal.style.display = "block";
+      giftBtn.style.display = "none";
+      if (navigator.vibrate) navigator.vibrate([30, 40, 30]);
+    });
+  </script>
+</body>
+</html>
