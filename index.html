@@ -128,6 +128,45 @@
       font-size: 1.5rem;
       margin-top: 0.8rem;
     }
+    .popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.popup-box {
+  position: relative;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
+  padding: 1.4rem 1.6rem;
+  border-radius: 18px;
+  max-width: 280px;
+  text-align: center;
+  color: #fff;
+  font-size: 1rem;
+  animation: popupIn 0.35s ease;
+}
+
+/* Close button */
+.popup-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.popup-close:hover {
+  opacity: 1;
+}
   </style>
 </head>
 
@@ -183,6 +222,14 @@
         <div class="gift-icons">💝 💫 💖 🌙</div>
       </div>
     </section>
+
+    <!-- Custom Popup -->
+<div id="popupOverlay" class="popup-overlay">
+  <div class="popup-box">
+    <button class="popup-close" id="popupClose">✕</button>
+    <p id="popupText"></p>
+  </div>
+</div>
   </main>
 
   <!-- ✨ tsParticles -->
@@ -206,23 +253,41 @@
     /* Hero Image Easter Egg */
     const heroImg = document.getElementById("heroImg");
     let tapped = false;
+heroImg.addEventListener("click", () => {
+  heroImg.classList.remove("pop");
+  void heroImg.offsetWidth;
+  heroImg.classList.add("pop");
 
-    heroImg.addEventListener("click", () => {
-      heroImg.classList.remove("pop");
-      void heroImg.offsetWidth;
-      heroImg.classList.add("pop");
+  if (!tapped) {
+    showPopup("Easy 😏 I know you look beautiful… but that doesn’t mean you’re not an old lady.");
+    tapped = true;
+  } else {
+    showPopup("Okay okay relax… you’re as young as 29 💖");
+  }
+});
+    
+const popupOverlay = document.getElementById("popupOverlay");
+const popupText = document.getElementById("popupText");
+const popupClose = document.getElementById("popupClose");
 
-      if (navigator.vibrate) navigator.vibrate(40);
+function showPopup(message) {
+  popupText.textContent = message;
+  popupOverlay.style.display = "flex";
+  if (navigator.vibrate) navigator.vibrate(30);
+}
 
-      alert(
-        tapped
-          ? "Okay okay relax… you are as young as 18 💖"
-          : "Easy 😏 You look beautiful, but that doesn’t mean you’re not an old lady."
-      );
+function closePopup() {
+  popupOverlay.style.display = "none";
+}
 
-      tapped = true;
-    });
+popupClose.addEventListener("click", closePopup);
 
+// Close when clicking outside the popup box
+popupOverlay.addEventListener("click", (e) => {
+  if (e.target === popupOverlay) {
+    closePopup();
+  }
+});
     /* Gift Reveal */
     const giftBtn = document.getElementById("giftBtn");
     const giftReveal = document.getElementById("giftReveal");
